@@ -9,10 +9,8 @@ from sentence_transformers import SentenceTransformer
 def load_assets():
     # load transformer-based encoder (all-MiniLM-L6-v2)
     model = SentenceTransformer('all-MiniLM-L6-v2')
-    
-    # load faiss index (library for vector search: approximate nearest neighbor search)
+    # load faiss index (library for vector search to approximate nearest neighbor)
     index = faiss.read_index("semantic_model/song_vibe_index.faiss")
-    
     # load metadata dataframe (titles & genres)
     metadata = pd.read_pickle("semantic_model/song_metadata.pkl")
     return model, index, metadata
@@ -29,12 +27,10 @@ if query:
     # SEMANTIC ENCODING & SEARCH
     # convert natural language input into a high-dimensional vector
     query_vector = model.encode([query])
-    
     # execute L2 distance search in the vector space for the top 5 matches
     distances, indices = index.search(query_vector, k=5)
-    
     # DISPLAY RESULTS
     st.subheader("Top Semantic Matches:")
     for i in indices[0]:
         song = metadata.iloc[i]
-        st.write(f"**{song['title']}** — *Genre: {song['genre']}*")
+        st.write(f"**{song['title']}** — *Genre: {song['genre']}*") # markdown
