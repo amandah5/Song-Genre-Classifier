@@ -20,7 +20,7 @@ def load_assets():
 model, index, metadata = load_assets()
 
 # USER INTERFACE
-st.title("🎵 Semantic Lyric Search")
+st.title("🎵 Semantic Lyric Search 🎵")
 st.markdown("Query the dataset using natural language to find songs with similar thematic or emotional intent.")
 
 query = st.text_input("Enter a search query (e.g., 'existential dread in an urban setting' or 'triumphant return home'):")
